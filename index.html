@@ -23,7 +23,7 @@
         </nav>
         <div class="container mt-5">
             <h1>{{title}}</h1>
-            <product-component :premium="premiumUser"></product-component>
+            <product-component :premium="premiumUser" :cart="cart" @add-to-cart="addToShoppingCart" @remove-from-cart="removeFromShoppingCart"></product-component>
         </div>
         <div class="modal" :class="{show: displayCart}" :style="modalStyle" tabindex="-1">
             <div class="modal-dialog">
@@ -73,7 +73,7 @@
                     </select>
                     <div class="container mt-3" text-align= "center">
                     <button :disabled="!hasStock" @click="addToCart" class="btn btn-primary">Agrégalo a tu carrito!</button>
-                    <button class="btn btn-primary">Lo quieres quitar?</button>
+                    <button @click="removeFromCart" class="btn btn-primary">Lo quieres quitar?</button>
                     </div>
                   </div>
             </div>

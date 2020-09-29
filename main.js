@@ -14,7 +14,17 @@ data: {
 },
 
 methods: {
+    addToShoppingCart (product) {
+        this.cart.push(product);
+    },
+    removeFromShoppingCart(product) {
+        let index = this.cart.indexOf(product);
 
+        if (this.cart.length > -1){
+            this.cart.splice(index,1);
+
+        }
+    }
 },
 computed: {
     modalStyle() {

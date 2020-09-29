@@ -3,6 +3,10 @@ Vue.component("product-component",{
         premium: {
             type: Boolean,
             required: true
+        },
+        cart: {
+            type: Array,
+            required: true
         }
     },
     template: "#product-template",
@@ -55,9 +59,20 @@ Vue.component("product-component",{
         var defaultFormat = this.formats.find(format => format.default == true);
         this.selectedFormat = defaultFormat;
     },
-    methods : {
+    methods: {
         addToCart() {
-            this.selectedFormat.stock -= 1
+            this.selectedFormat.stock -= 1;
+            this.$emit("add-to-cart",this.selectedFormat)
+        },
+        removeFromCart() {
+            let variantInCart = this.cart.filter(variant => variant == this.selectedFormat)
+            if (variantInCart.length > 0) {
+                this.selectedFormat.stock += 1
+                this.$emit("remove-from-cart",this.selectedFormat)
+            }
+
+
         }
-    }
+    },
+    template: "#product-template",
 });
